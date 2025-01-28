@@ -4,12 +4,10 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Circle, CircleCheck } from "lucide-react";
 
 export default function FileUpload() {
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
-  const [fileName, setFileName] = useState<string | null>(null);
   const [file, setFile] = useState<File>();
   const [isUploading, setIsUploading] = useState(false);
   const [token, setToken] = useState<string | null>("");
@@ -43,18 +41,16 @@ export default function FileUpload() {
     if (file) {
       if (!allowedTypes.includes(file.type)) {
         setError("Por favor, faça o upload de um arquivo válido: tsv ou txt.");
-        setFileName(null);
+
         return;
       }
 
       if (file.size > 25 * 1024 * 1024) {
         setError("O arquivo deve ser menor que 25 MB.");
-        setFileName(null);
         return;
       }
 
       setError(null);
-      setFileName(file.name);
     }
   };
 
@@ -118,7 +114,6 @@ export default function FileUpload() {
         );
       }
       setError(null);
-      setFileName(null);
       setFile(undefined);
       setSuccess(
         "Arquivo enviado com sucesso! Verifique seu email para mais detalhes."
@@ -160,19 +155,11 @@ export default function FileUpload() {
           />
           {error && <p className="text-red-500 text-xs">{error}</p>}{" "}
           {success && <p className="text-green-500 text-xs">{success}</p>}{" "}
-          {fileName && (
-            <div className="flex items-center gap-1 mt-4">
-              <p className="text-green-500 text-xs">
-                Arquivo pronto para o envio{" "}
-              </p>
-              <CircleCheck className="w-4 h-4 text-green-500" />
-            </div>
-          )}{" "}
         </div>
       </CardContent>
       <CardFooter>
         <Button size="lg" disabled={!!error} onClick={handleUpload}>
-          {isUploading ? "Carregando..." : "Upload"}
+          {isUploading ? "Enviando..." : "Upload"}
         </Button>
       </CardFooter>
     </Card>
