@@ -4,6 +4,7 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 
 export default function FileUpload() {
   const [error, setError] = useState<string | null>(null);
@@ -13,6 +14,8 @@ export default function FileUpload() {
   const [token, setToken] = useState<string | null>("");
 
   const [isTokenVerified, setIsTokenVerified] = useState(false);
+
+  const router = useRouter();
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -80,6 +83,8 @@ export default function FileUpload() {
       } else {
         setError("Token inválido ou expirado.");
         setIsTokenVerified(false);
+        localStorage.removeItem("token");
+        router.push("/login");
       }
     } catch (error) {
       setError("Erro não esperado. Por favor, tente novamente mais tarde.");
