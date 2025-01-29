@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <body
-        className={`${poppins.className} antialiased leading-5 h-screen text-xl`}
+        className={`${poppins.className} antialiased leading-5 h-screen text-xl flex flex-col`}
       >
         <ThemeProvider
           attribute="class"

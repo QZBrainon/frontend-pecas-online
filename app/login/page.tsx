@@ -5,8 +5,8 @@ import { MagicLinkLoginForm } from "@/components/login-form";
 
 export default function Page() {
   return (
-    <div className="flex flex-col h-screen w-full container mx-auto">
-      <div className="flex h-screen w-full items-center justify-center px-4">
+    <div className="flex flex-1 flex-col max-h-screen w-full container mx-auto overflow-hidden">
+      <div className="flex w-full items-center justify-center px-4">
         <MagicLinkLoginForm />
       </div>
     </div>
