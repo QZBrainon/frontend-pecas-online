@@ -53,7 +53,7 @@ export function MagicLinkLoginForm() {
   };
 
   return (
-    <Card className="mx-auto max-w-sm mt-28">
+    <Card className="mx-auto max-w-sm">
       <CardHeader>
         <CardTitle className="text-2xl">Login</CardTitle>
         <CardDescription>
