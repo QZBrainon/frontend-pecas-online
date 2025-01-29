@@ -27,7 +27,7 @@ export default function Header() {
       setToken(storedToken);
       setLoadingToken(false);
     }
-  }, []);
+  }, [token]);
   return (
     <header className="flex items-center py-10 container mx-auto px-4">
       <Link className="flex items-center justify-center" href="/">
@@ -86,7 +86,7 @@ export default function Header() {
               </Button>
             </DialogTrigger>
             <DialogContent>
-              <FileUpload />
+              <FileUpload token={token} setToken={setToken} />
             </DialogContent>
           </Dialog>
         ) : (

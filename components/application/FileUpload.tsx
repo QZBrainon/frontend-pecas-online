@@ -5,17 +5,24 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
+import { useToast } from "@/hooks/use-toast";
 
-export default function FileUpload() {
+export default function FileUpload({
+  token,
+  setToken,
+}: {
+  token: string;
+  setToken: React.Dispatch<React.SetStateAction<string | null>>;
+}) {
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
   const [file, setFile] = useState<File>();
   const [isUploading, setIsUploading] = useState(false);
-  const [token, setToken] = useState<string | null>("");
 
   const [isTokenVerified, setIsTokenVerified] = useState(false);
 
   const router = useRouter();
+  const { toast } = useToast();
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -23,7 +30,7 @@ export default function FileUpload() {
       setToken(storedToken);
       console.log("Token retrieved from localStorage:", storedToken);
     }
-  }, []);
+  }, [token, setToken]);
 
   const allowedTypes = ["text/tab-separated-values", "text/plain"];
 
@@ -84,6 +91,12 @@ export default function FileUpload() {
         setError("Token inválido ou expirado.");
         setIsTokenVerified(false);
         localStorage.removeItem("token");
+        setToken(null);
+        toast({
+          title: "Token inválido ou expirado.",
+          description: "Por favor, faça login novamente.",
+          variant: "destructive",
+        });
         router.push("/login");
       }
     } catch (error) {
