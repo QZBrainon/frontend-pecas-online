@@ -127,6 +127,9 @@ export default function FileUpload({
       });
 
       if (!response.ok) {
+        setError(
+          "Erro ao subir o arquivo. Por favor, tente novamente mais tarde."
+        );
         throw new Error(
           "Erro ao subir o arquivo. Por favor, tente novamente mais tarde."
         );

@@ -21,7 +21,6 @@ export default function Header() {
   const [loadingToken, setLoadingToken] = React.useState(true);
   useEffect(() => {
     setLoadingToken(true);
-    // Ensure this only runs on the client side
     if (typeof window !== "undefined") {
       const storedToken = localStorage.getItem("token");
       setToken(storedToken);

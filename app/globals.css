@@ -30,6 +30,8 @@ body {
     --accent-foreground: 24 9.8% 10%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 60 9.1% 97.8%;
+    --success: 142 51% 41%;
+    --success-foreground: 0 0% 100%;
     --border: 20 5.9% 90%;
     --input: 20 5.9% 90%;
     --ring: 20 14.3% 4.1%;
