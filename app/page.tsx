@@ -49,15 +49,12 @@ export default function Home() {
     try {
       const res = await fetch("/api/banners");
       const bannerUrl = await res.text();
+      console.log("Fetched banner URL:", bannerUrl);
       setBannerSrc(bannerUrl);
     } catch (error) {
       console.error("Failed to fetch banner:", error);
     }
   };
-
-  useEffect(() => {
-    fetchBanner();
-  }, []);
 
   useEffect(() => {
     if (!code) {
@@ -69,6 +66,7 @@ export default function Home() {
   }, [currentPage]);
 
   useEffect(() => {
+    fetchBanner();
     const interval = setInterval(() => {
       fetchBanner();
     }, 60000);
@@ -82,6 +80,7 @@ export default function Home() {
         {bannerSrc ? (
           <div className="relative max-w-4xl h-32 sm:h-44 mx-auto mt-4">
             <Image
+              key={bannerSrc}
               src={bannerSrc}
               alt="Banner"
               fill
