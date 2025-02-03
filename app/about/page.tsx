@@ -12,7 +12,7 @@ export default function About() {
             Sobre Nós
           </h1>
           <p className="lg:w-2/3 mx-auto leading-relaxed text-md text-muted-foreground">
-            Conheça mais sobre a Peças Online e nossa missão de fornecer as
+            Conheça mais sobre a Peças Online X e nossa missão de fornecer as
             melhores soluções para o seu negócio.
           </p>
         </div>
