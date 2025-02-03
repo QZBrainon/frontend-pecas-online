@@ -1,12 +1,14 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, use, useEffect, useState } from "react";
 import { TableSkeleton } from "@/components/application/SkeletonTable";
 import ProductTable from "@/components/application/ProductTable";
 import { Product } from "@/components/application/ProductTable";
 import { PaginationControls } from "@/components/application/PaginationControls";
 import "./globals.css";
+import Image from "next/image";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Home() {
   const [code, setCode] = useState("");
@@ -14,6 +16,8 @@ export default function Home() {
   const [totalPages, setTotalPages] = useState(0);
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(false);
+  const [bannerSrc, setBannerSrc] = useState<string>("");
+  const [refetchInterval, setRefetchInterval] = useState(0);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCode(e.target.value);
@@ -42,6 +46,16 @@ export default function Home() {
     }
   };
 
+  const fetchBanner = async () => {
+    try {
+      const res = await fetch("/api/banners");
+      const bannerUrl = await res.text();
+      setBannerSrc(bannerUrl);
+    } catch (error) {
+      console.error("Failed to fetch banner:", error);
+    }
+  };
+
   useEffect(() => {
     if (!code) {
       setProducts([]);
@@ -51,10 +65,39 @@ export default function Home() {
     fetchData(code, currentPage);
   }, [currentPage]);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setRefetchInterval((prev) => prev + 1);
+      fetchBanner();
+    }, 60000);
+
+    console.log("Refetch interval:", refetchInterval);
+
+    return () => clearInterval(interval);
+  }, [refetchInterval]);
+
+  useEffect(() => {
+    fetchBanner();
+  }, []);
+
   return (
     <div className="flex flex-col max-h-screen">
       <main className="flex-1">
-        <section className="w-full py-12 md:py-24 lg:py-32 container mx-auto">
+        {bannerSrc ? (
+          <div className="relative max-w-4xl h-32 sm:h-44 mx-auto mt-4">
+            <Image
+              src={bannerSrc}
+              alt="Banner"
+              fill
+              sizes="(max-width: 640px) 100vw, (max-width: 768px) 80vw, 70vw"
+              priority
+              className="object-cover"
+            />
+          </div>
+        ) : (
+          <Skeleton className="relative max-w-4xl h-32 sm:h-44 mx-auto mt-4" />
+        )}
+        <section className="w-full py-12 md:py-24 lg:py-20 container mx-auto">
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center space-y-4 text-center">
               <div className="space-y-6">
