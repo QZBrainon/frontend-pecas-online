@@ -17,7 +17,6 @@ export default function Home() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(false);
   const [bannerSrc, setBannerSrc] = useState<string>("");
-  const [refetchInterval, setRefetchInterval] = useState(0);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCode(e.target.value);
@@ -57,6 +56,10 @@ export default function Home() {
   };
 
   useEffect(() => {
+    fetchBanner();
+  }, []);
+
+  useEffect(() => {
     if (!code) {
       setProducts([]);
       setTotalPages(0);
@@ -67,17 +70,10 @@ export default function Home() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setRefetchInterval((prev) => prev + 1);
       fetchBanner();
     }, 60000);
 
-    console.log("Refetch interval:", refetchInterval);
-
     return () => clearInterval(interval);
-  }, [refetchInterval]);
-
-  useEffect(() => {
-    fetchBanner();
   }, []);
 
   return (
