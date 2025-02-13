@@ -91,7 +91,7 @@ export default function ProductTable({ products }: ProductTableProps) {
                   {product.peca.descricao}
                 </TableCell>
                 <TableCell className="text-xs sm:text-sm">
-                  {product.peca.categoria.nome}
+                  {product.peca.categoria?.nome?.trim() ? product.peca.categoria.nome : "Genérica"}
                 </TableCell>
                 <TableCell className="text-xs sm:text-sm text-nowrap">
                   {product.peca.precoEmCentavos
