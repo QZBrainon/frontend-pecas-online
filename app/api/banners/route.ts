@@ -2,7 +2,7 @@ import { revalidatePath } from "next/cache";
 
 export async function GET(_req: Request) {
   const response = await fetch(
-    `https://novopeasonlinebackend-lnq16zyw.b4a.run/v1/api/banner`
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/banner`
   );
   const bannerUrl = await response.text();
   const headers = new Headers(response.headers);

@@ -57,7 +57,7 @@ export default function Contact() {
   async function onSubmit(data: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
     const response = await fetch(
-      "https://novopeasonlinebackend-lnq16zyw.b4a.run/v1/api/contact-form",
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/contact-form`,
       {
         method: "POST",
         headers: {
@@ -90,7 +90,7 @@ export default function Contact() {
   //   setIsSubmitting(true);
   //   try {
   //     const response = await fetch(
-  //       "https://novopeasonlinebackend-lnq16zyw.b4a.run/v1/api/contact-form",
+  //       "${process.env.NEXT_PUBLIC_BACKEND_URL}/v1/api/contact-form",
   //       {
   //         method: "POST",
   //         headers: {

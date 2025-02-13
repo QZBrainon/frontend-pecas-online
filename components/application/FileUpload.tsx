@@ -75,7 +75,7 @@ export default function FileUpload({
     }
     try {
       const response = await fetch(
-        `https://novopeasonlinebackend-lnq16zyw.b4a.run/api/v1/login/verify?token=${token}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/login/verify?token=${token}`,
         {
           method: "GET",
           headers: {
@@ -117,7 +117,7 @@ export default function FileUpload({
     formData.append("file", file);
 
     try {
-      const url = `https://novopeasonlinebackend-lnq16zyw.b4a.run/api/v1/estoque?token=${token}`;
+      const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/estoque?token=${token}`;
       const response = await fetch(url, {
         method: "POST",
         headers: {
