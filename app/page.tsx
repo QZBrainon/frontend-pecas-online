@@ -51,7 +51,7 @@ export default function Home() {
 
   const fetchBanner = async () => {
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/banner`);
+      const res = await fetch("/api/banner");
       const bannerUrl = await res.text();
 
       console.log("Fetched banner URL:", bannerUrl);
