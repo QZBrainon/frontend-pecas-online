@@ -28,13 +28,17 @@ export default function Home() {
 
   const fetchData = async (code: string, page: number) => {
     setLoading(true);
+
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/estoque/codigo/${code}?page=${page}&size=10`
       );
+
       const data = await res.json();
+
       setProducts(data.content);
       setTotalPages(data.totalPages);
+
       if (currentPage > data.totalPages) {
         setCurrentPage(0);
       }
@@ -47,9 +51,11 @@ export default function Home() {
 
   const fetchBanner = async () => {
     try {
-      const res = await fetch("/api/banners");
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/banner`);
       const bannerUrl = await res.text();
+
       console.log("Fetched banner URL:", bannerUrl);
+
       setBannerSrc(bannerUrl);
     } catch (error) {
       console.error("Failed to fetch banner:", error);
