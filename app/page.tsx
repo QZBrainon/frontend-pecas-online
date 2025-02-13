@@ -51,7 +51,7 @@ export default function Home() {
 
   const fetchBanner = async () => {
     try {
-      const res = await fetch("/api/banner");
+      const res = await fetch("https://backend.pecasonlinex.com.br/v1/api/banner");
       const bannerUrl = await res.text();
 
       console.log("Fetched banner URL:", bannerUrl);
