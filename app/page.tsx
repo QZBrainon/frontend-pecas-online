@@ -111,7 +111,13 @@ export default function Home() {
                 </p>
               </div>
               <div className="w-full max-w-md space-y-2">
-                <form className="flex space-x-2">
+                <form
+                  className="flex space-x-2"
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    fetchData(code, currentPage);
+                  }}
+                >
                   <Input
                     className="flex-1"
                     placeholder="Digite os códigos das peças"
@@ -119,10 +125,7 @@ export default function Home() {
                     value={code}
                     onChange={handleSearch}
                   />
-                  <Button
-                    type="button"
-                    onClick={() => fetchData(code, currentPage)}
-                  >
+                  <Button type="submit">
                     Pesquisar
                   </Button>
                 </form>
