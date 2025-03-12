@@ -117,7 +117,8 @@ export default function FileUpload({
     formData.append("file", file);
 
     try {
-      const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/estoque?token=${token}`;
+      const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/estoque?token=${token}`;
+
       const response = await fetch(url, {
         method: "POST",
         headers: {
