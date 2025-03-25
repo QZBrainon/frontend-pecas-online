@@ -11,7 +11,7 @@ export interface FormData {
   telefone: string;
   whatsapp: string;
   email: string;
-  website: string;
+  website?: string;
   vendedores: string;
 }
 

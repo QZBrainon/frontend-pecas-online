@@ -84,19 +84,15 @@ export default function Home() {
     <div className="flex flex-col max-h-screen">
       <main className="flex-1">
         {bannerSrc ? (
-          <div className="relative max-w-4xl h-32 sm:h-44 mx-auto mt-4">
-            <Image
-              key={bannerSrc}
+          <div className="relative w-full max-w-4xl mx-auto mt-4">
+            <img
               src={bannerSrc}
-              alt="Banner"
-              fill
-              sizes="(max-width: 640px) 100vw, (max-width: 768px) 80vw, 70vw"
-              priority
-              className="object-contain"
+              alt="Banner promocional"
+              className="w-full h-auto max-h-[300px] object-contain mx-auto"
             />
           </div>
         ) : (
-           <Skeleton className="relative max-w-4xl aspect-[16/6] mx-auto mt-4" />
+          <Skeleton className="relative max-w-4xl aspect-[3/1] mx-auto mt-4" />
         )}
         <section className="w-full py-12 md:py-24 lg:py-20 container mx-auto">
           <div className="container px-4 md:px-6">

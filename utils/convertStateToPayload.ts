@@ -22,7 +22,7 @@ export function convertStateToPayload(state: FormData) {
       fonePecas: state.telefone,
       whatsappGeral: state.whatsapp,
       whatsappPecas: state.whatsapp,
-      website: state.website,
+      website: state.website || "",
     },
     endereco: {
       endereco: state.endereco,
