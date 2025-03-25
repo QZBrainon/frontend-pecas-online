@@ -75,7 +75,7 @@ export default function Home() {
     fetchBanner();
     const interval = setInterval(() => {
       fetchBanner();
-    }, 60000);
+    }, 30000);
 
     return () => clearInterval(interval);
   }, []);
