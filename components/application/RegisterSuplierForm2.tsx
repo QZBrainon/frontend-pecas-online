@@ -105,6 +105,7 @@ export default function RegisterSuplierForm2() {
   async function onSubmit(data: z.infer<typeof formSchema>) {
     console.log("Form submission triggered");
     console.log(form.formState.errors);
+
     const payload = convertStateToPayload(data);
     const response = await fetch(`/api/fornecedores`, {
       method: "POST",
@@ -113,6 +114,7 @@ export default function RegisterSuplierForm2() {
       },
       body: JSON.stringify(payload),
     });
+
     if (response.status === 201) {
       router.push("/thanks");
     } else if (response.status === 400) {

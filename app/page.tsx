@@ -88,7 +88,7 @@ export default function Home() {
             <img
               src={bannerSrc}
               alt="Banner promocional"
-              className="w-full h-auto max-h-[300px] object-contain mx-auto"
+              className="w-full h-auto max-h-[200px] object-contain mx-auto"
             />
           </div>
         ) : (
