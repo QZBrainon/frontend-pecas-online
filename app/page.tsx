@@ -92,11 +92,11 @@ export default function Home() {
               fill
               sizes="(max-width: 640px) 100vw, (max-width: 768px) 80vw, 70vw"
               priority
-              className="object-cover"
+              className="object-contain"
             />
           </div>
         ) : (
-          <Skeleton className="relative max-w-4xl h-32 sm:h-44 mx-auto mt-4" />
+           <Skeleton className="relative max-w-4xl aspect-[16/6] mx-auto mt-4" />
         )}
         <section className="w-full py-12 md:py-24 lg:py-20 container mx-auto">
           <div className="container px-4 md:px-6">
