@@ -27,7 +27,7 @@ export default function About() {
                 atualizado de peças, conectando empresas a
                 fornecedores regionais com transparência e eficiência,
                 facilitando o acesso a estoques em tempo real e promovendo a
-                agilidade.
+                agilidade em todos os setores.
               </p>
             </div>
           </div>
