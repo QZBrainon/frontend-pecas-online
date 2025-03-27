@@ -24,7 +24,7 @@ export default function About() {
               </h2>
               <p className="leading-relaxed mb-4 text-muted-foreground">
                 Nossa missão é oferecer o catálogo B2B mais confiável e
-                atualizado de peças automotivas, conectando empresas a
+                atualizado de peças, conectando empresas a
                 fornecedores regionais com transparência e eficiência,
                 facilitando o acesso a estoques em tempo real e promovendo a
                 agilidade no setor automotivo brasileiro.
