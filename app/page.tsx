@@ -17,6 +17,21 @@ export default function Home() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(false);
   const [bannerSrc, setBannerSrc] = useState<string>("");
+  const [showVideo, setShowVideo] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowVideo(true);
+
+      setTimeout(() => {
+        const video = document.getElementById("popup-video") as HTMLVideoElement;
+        video?.play();
+      }, 100);
+    }, 5000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCode(e.target.value);
@@ -82,6 +97,33 @@ export default function Home() {
 
   return (
     <div className="flex flex-col max-h-screen">
+    {showVideo && (
+      <div className="fixed inset-0 bg-black bg-opacity-80 z-50 flex justify-center items-center">
+        <div className="relative w-full max-w-3xl px-4">
+          <button
+            onClick={() => {
+              const video = document.getElementById("popup-video") as HTMLVideoElement;
+              video.pause();
+              video.currentTime = 0;
+              setShowVideo(false);
+            }}
+            className="absolute top-2 right-2 text-white bg-red-600 px-3 py-1 rounded hover:bg-red-700 z-50"
+          >
+            Fechar
+          </button>
+          <video
+            id="popup-video"
+            controls
+            className="w-full rounded-lg shadow-lg"
+            autoPlay
+          >
+            <source src="https://backend.pecasonlinex.com.br/uploads/pecas-online-pv.mp4" type="video/mp4" />
+            Seu navegador não suporta vídeo.
+          </video>
+        </div>
+      </div>
+    )}
+
       <main className="flex-1">
         {bannerSrc ? (
           <div className="relative w-full max-w-4xl mx-auto mt-4">
