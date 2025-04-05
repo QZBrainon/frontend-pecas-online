@@ -16,6 +16,27 @@ export default function About() {
             melhores soluções para o seu negócio.
           </p>
         </div>
+
+        {/* Container do vídeo */}
+        <div className="flex justify-center mb-12">
+          <div className="w-full max-w-4xl rounded-lg overflow-hidden shadow-lg">
+            <video
+              controls
+              autoPlay
+              muted
+              loop
+              className="w-full"
+              poster="https://backend.pecasonlinex.com.br/uploads/thumbnail.jpg" // Opcional: adicione uma thumbnail
+            >
+              <source
+                src="https://backend.pecasonlinex.com.br/uploads/pecas-online-pv.mp4"
+                type="video/mp4"
+              />
+              Seu navegador não suporta o elemento de vídeo.
+            </video>
+          </div>
+        </div>
+
         <div className="flex flex-wrap -m-4 justify-center">
           <div className="p-4 lg:w-1/2 md:w-full">
             <div className="h-full bg-muted p-8 rounded-lg">
