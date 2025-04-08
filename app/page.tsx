@@ -110,10 +110,11 @@ export default function Home() {
                 video.currentTime = 0;
                 setShowVideo(false);
               }}
-              className="absolute top-2 right-2 text-white bg-red-600 px-3 py-1 rounded hover:bg-red-700 z-50"
+              className="absolute top-3 right-8 text-white bg-red-600 px-3 py-1 rounded hover:bg-red-700 z-50"
             >
               Fechar
             </button>
+
             <video
               id="popup-video"
               controls
