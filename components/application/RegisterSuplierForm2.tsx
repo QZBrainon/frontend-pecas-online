@@ -57,7 +57,7 @@ const formSchema = z.object({
     .nonempty("O CEP é obrigatório"),
   bairro: z.string().nonempty("O bairro do fornecedor é obrigatório"),
   vendedores: z.string().nonempty("O nome dos vendedores é obrigatório"),
-  website: z.string().url("O website precisa ser uma URL válida").optional(),
+  website: z.string().optional(),
 });
 
 export default function RegisterSuplierForm2() {
