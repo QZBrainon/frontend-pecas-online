@@ -9,6 +9,7 @@ import { PaginationControls } from "@/components/application/PaginationControls"
 import "./globals.css";
 import Image from "next/image";
 import { Skeleton } from "@/components/ui/skeleton";
+import clsx from "clsx";
 
 export default function Home() {
   const [code, setCode] = useState("");
@@ -154,42 +155,60 @@ export default function Home() {
             <img
               src={bannerSrc}
               alt="Banner promocional"
-              className={`w-full h-auto object-contain mx-auto ${
-                isShortScreen ? "max-h-[140px]" : "max-h-[200px]"
-              }`}
+              className={clsx("w-full h-auto object-contain mx-auto", {
+                "max-h-[140px]": isShortScreen,
+                "max-h-[200px]": !isShortScreen,
+              })}
             />
           </div>
         ) : (
           <Skeleton
-            className={`relative max-w-4xl aspect-[3/1] mx-auto mt-4 ${
-              isShortScreen ? "max-h-[140px]" : ""
-            }`}
+            className={clsx("relative max-w-4xl aspect-[3/1] mx-auto mt-4", {
+              "max-h-[140px]": isShortScreen,
+              "max-h-[200px]": !isShortScreen,
+            })}
           />
         )}
 
         <section
-          className={`w-full container mx-auto ${
-            isShortScreen ? "py-6 md:py-8" : "py-12 md:py-24 lg:py-20"
-          }`}
+          className={clsx("w-full container mx-auto", {
+            "py-6 md:py-8": isShortScreen,
+            "py-12 md:py-24 lg:py-20": !isShortScreen,
+          })}
         >
           <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center space-y-4 text-center">
-              <div className={`space-y-${isShortScreen ? "3" : "6"}`}>
+            <div
+              className={clsx(
+                "flex flex-col items-center space-y-4 text-center",
+                {
+                  "space-y-3": isShortScreen,
+                  "space-y-6": !isShortScreen,
+                }
+              )}
+            >
+              <div
+                className={clsx({
+                  "space-y-3": isShortScreen,
+                  "space-y-6": !isShortScreen,
+                })}
+              >
                 <h1
-                  className={`font-bold tracking-tighter ${
-                    isShortScreen
-                      ? "text-2xl sm:text-3xl md:text-4xl"
-                      : "text-3xl sm:text-4xl md:text-5xl lg:text-6xl/none"
-                  }`}
+                  className={clsx("font-bold tracking-tighter", {
+                    "text-2xl sm:text-3xl md:text-4xl": isShortScreen,
+                    "text-3xl sm:text-4xl md:text-5xl lg:text-6xl/none":
+                      !isShortScreen,
+                  })}
                 >
                   Encontre todas as peças que precisa em um só lugar
                 </h1>
                 <p
-                  className={`mx-auto max-w-[700px] text-gray-500 dark:text-gray-400 ${
-                    isShortScreen
-                      ? "text-sm md:text-base md:mt-3"
-                      : "md:text-xl md:mt-6"
-                  }`}
+                  className={clsx(
+                    "mx-auto max-w-[700px] text-gray-500 dark:text-gray-400",
+                    {
+                      "text-sm md:text-base md:mt-3": isShortScreen,
+                      "md:text-xl md:mt-6": !isShortScreen,
+                    }
+                  )}
                 >
                   Digite os códigos das peças e encontre os melhores
                   fornecedores do mercado
