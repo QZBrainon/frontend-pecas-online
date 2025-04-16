@@ -18,6 +18,23 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [bannerSrc, setBannerSrc] = useState<string>("");
   const [showVideo, setShowVideo] = useState(false);
+  const [isShortScreen, setIsShortScreen] = useState(false);
+
+  // Check if the screen is shorter than 1080px
+  useEffect(() => {
+    const checkScreenHeight = () => {
+      setIsShortScreen(window.innerHeight < 1080);
+    };
+
+    // Initial check
+    checkScreenHeight();
+
+    // Add listener for resize events
+    window.addEventListener("resize", checkScreenHeight);
+
+    // Clean up
+    return () => window.removeEventListener("resize", checkScreenHeight);
+  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -97,27 +114,83 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col min-h-screen">
+      {showVideo && (
+        <div className="fixed inset-0 bg-black bg-opacity-80 z-50 flex justify-center items-center">
+          <div className="relative w-full max-w-3xl px-4">
+            <button
+              onClick={() => {
+                const video = document.getElementById(
+                  "popup-video"
+                ) as HTMLVideoElement;
+                video.pause();
+                video.currentTime = 0;
+                setShowVideo(false);
+              }}
+              className="absolute top-3 right-8 text-white bg-red-600 px-3 py-1 rounded hover:bg-red-700 z-50"
+            >
+              Fechar
+            </button>
+
+            <video
+              id="popup-video"
+              controls
+              className="w-full rounded-lg shadow-lg"
+              autoPlay
+            >
+              <source
+                src="https://backend.pecasonlinex.com.br/uploads/pecas-online-pv.mp4"
+                type="video/mp4"
+              />
+              Seu navegador não suporta vídeo.
+            </video>
+          </div>
+        </div>
+      )}
+
       <main className="flex-1">
         {bannerSrc ? (
           <div className="relative w-full max-w-4xl mx-auto mt-4">
             <img
               src={bannerSrc}
               alt="Banner promocional"
-              className="w-full h-auto max-h-[200px] object-contain mx-auto"
+              className={`w-full h-auto object-contain mx-auto ${
+                isShortScreen ? "max-h-[140px]" : "max-h-[200px]"
+              }`}
             />
           </div>
         ) : (
-          <Skeleton className="relative max-w-4xl aspect-[3/1] mx-auto mt-4" />
+          <Skeleton
+            className={`relative max-w-4xl aspect-[3/1] mx-auto mt-4 ${
+              isShortScreen ? "max-h-[140px]" : ""
+            }`}
+          />
         )}
-        <section className="w-full py-12 md:py-24 lg:py-20 container mx-auto">
+
+        <section
+          className={`w-full container mx-auto ${
+            isShortScreen ? "py-6 md:py-8" : "py-12 md:py-24 lg:py-20"
+          }`}
+        >
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center space-y-4 text-center">
-              <div className="space-y-6">
-                <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
+              <div className={`space-y-${isShortScreen ? "3" : "6"}`}>
+                <h1
+                  className={`font-bold tracking-tighter ${
+                    isShortScreen
+                      ? "text-2xl sm:text-3xl md:text-4xl"
+                      : "text-3xl sm:text-4xl md:text-5xl lg:text-6xl/none"
+                  }`}
+                >
                   Encontre todas as peças que precisa em um só lugar
                 </h1>
-                <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400 md:mt-6">
+                <p
+                  className={`mx-auto max-w-[700px] text-gray-500 dark:text-gray-400 ${
+                    isShortScreen
+                      ? "text-sm md:text-base md:mt-3"
+                      : "md:text-xl md:mt-6"
+                  }`}
+                >
                   Digite os códigos das peças e encontre os melhores
                   fornecedores do mercado
                 </p>
@@ -143,6 +216,7 @@ export default function Home() {
             </div>
           </div>
         </section>
+
         <section className="w-full py-12">
           <div className="container mx-auto px-4 md:px-6">
             {loading ? <TableSkeleton /> : <ProductTable products={products} />}
