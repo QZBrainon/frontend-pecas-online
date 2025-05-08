@@ -33,7 +33,6 @@ export default function Home() {
     // Add listener for resize events
     window.addEventListener("resize", checkScreenHeight);
 
-    // Clean up
     return () => window.removeEventListener("resize", checkScreenHeight);
   }, []);
 
