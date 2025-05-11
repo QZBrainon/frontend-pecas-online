@@ -65,9 +65,14 @@ const config: Config = {
           "0%, 100%": { transform: "rotate(20deg)" }, // Upward motion
           "50%": { transform: "rotate(-20deg)" }, // Downward motion
         },
+        marquee: {
+          "0%": { transform: "translateX(100%)" },
+          "100%": { transform: "translateX(-100%)" },
+        },
       },
       animation: {
         wrench: "wrenchMotion 1s ease-in-out infinite",
+        marquee: "marquee 25s linear infinite",
       },
     },
   },

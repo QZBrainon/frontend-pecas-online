@@ -18,6 +18,7 @@ export default function Home() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(false);
   const [bannerSrc, setBannerSrc] = useState<string>("");
+  const [additionalBanners, setAdditionalBanners] = useState<string[]>([]);
   const [showVideo, setShowVideo] = useState(false);
   const [isShortScreen, setIsShortScreen] = useState(false);
 
@@ -82,16 +83,39 @@ export default function Home() {
     }
   };
 
+  // Function to shuffle an array (Fisher-Yates algorithm)
+  const shuffleArray = (array: string[]) => {
+    const newArray = [...array];
+    for (let i = newArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+    }
+    return newArray;
+  };
+
   const fetchBanner = async () => {
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/banner`);
-      const bannerUrl = await res.text();
+      // Fetch main banner from the original endpoint
+      const mainBannerRes = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/banner`);
+      const mainBannerUrl = await mainBannerRes.text();
 
-      console.log("Fetched banner URL:", bannerUrl);
+      // Set the main banner
+      setBannerSrc(mainBannerUrl);
 
-      setBannerSrc(bannerUrl);
+      // Fetch rotating banners from the new endpoint
+      const rotatingBannersRes = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/banner/all`);
+      const rotatingBanners = await rotatingBannersRes.json();
+
+      console.log("Fetched rotating banners:", rotatingBanners);
+
+      // Randomize the rotating banners for the marquee
+      if (rotatingBanners && rotatingBanners.length > 0) {
+        setAdditionalBanners(shuffleArray(rotatingBanners));
+      } else {
+        setAdditionalBanners([]);
+      }
     } catch (error) {
-      console.error("Failed to fetch banner:", error);
+      console.error("Failed to fetch banners:", error);
     }
   };
 
@@ -116,11 +140,12 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
       <main className="flex-1">
+        {/* Main Banner */}
         {bannerSrc ? (
           <div className="relative w-full max-w-4xl mx-auto mt-4">
             <img
               src={bannerSrc}
-              alt="Banner promocional"
+              alt="Banner promocional principal"
               className={clsx("w-full h-auto object-contain mx-auto", {
                 "max-h-[140px]": isShortScreen,
                 "max-h-[200px]": !isShortScreen,
@@ -134,6 +159,25 @@ export default function Home() {
               "max-h-[200px]": !isShortScreen,
             })}
           />
+        )}
+
+        {/* Marquee Banner */}
+        {additionalBanners.length > 0 && (
+          <div className="w-full max-w-4xl mx-auto mt-2 overflow-hidden">
+            <div className="flex animate-marquee whitespace-nowrap">
+              {additionalBanners.map((banner, index) => (
+                <img
+                  key={index}
+                  src={banner}
+                  alt={`Banner promocional ${index + 2}`}
+                  className={clsx("h-auto object-contain mx-2", {
+                    "max-h-[60px]": isShortScreen,
+                    "max-h-[80px]": !isShortScreen,
+                  })}
+                />
+              ))}
+            </div>
+          </div>
         )}
 
         <section
