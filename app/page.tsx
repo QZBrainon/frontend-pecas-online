@@ -64,8 +64,11 @@ export default function Home() {
     setLoading(true);
 
     try {
+      // Convert code to uppercase to make search case-insensitive
+      const uppercaseCode = code.toUpperCase();
+
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/estoque/codigo/${code}?page=${page}&size=10`
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/estoque/codigo/${uppercaseCode}?page=${page}&size=10`
       );
 
       const data = await res.json();
