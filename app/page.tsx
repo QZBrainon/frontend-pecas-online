@@ -99,14 +99,18 @@ export default function Home() {
   const fetchBanner = async () => {
     try {
       // Fetch main banner from the original endpoint
-      const mainBannerRes = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/banner`);
+      const mainBannerRes = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/banner`
+      );
       const mainBannerUrl = await mainBannerRes.text();
 
       // Set the main banner
       setBannerSrc(mainBannerUrl);
 
       // Fetch rotating banners from the new endpoint
-      const rotatingBannersRes = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/banner/all`);
+      const rotatingBannersRes = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/banner/all`
+      );
       const rotatingBanners = await rotatingBannersRes.json();
 
       console.log("Fetched rotating banners:", rotatingBanners);
