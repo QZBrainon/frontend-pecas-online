@@ -185,8 +185,8 @@ export default function Home() {
 
         <section
           className={clsx("w-full container mx-auto", {
-            "py-6 md:py-8": isShortScreen,
-            "py-12 md:py-24 lg:py-20": !isShortScreen,
+            "py-6 md:py-6": isShortScreen,
+            "py-6 md:py-12 lg:py-10": !isShortScreen,
           })}
         >
           <div className="container px-4 md:px-6">
@@ -249,7 +249,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="w-full py-12">
+        <section className="w-full">
           <div className="container mx-auto px-4 md:px-6">
             {loading ? <TableSkeleton /> : <ProductTable products={products} />}
             <div className="flex container mx-auto">
