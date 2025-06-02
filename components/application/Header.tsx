@@ -32,7 +32,7 @@ export default function Header() {
       <Link className="flex items-center justify-center" href="/">
         <Image
           src="/images/logo-white.png"
-          alt="AutoPeças Online"
+          alt="Peças Por Código"
           width={160}
           height={40}
           className="object-contain dark:block hidden"
@@ -42,7 +42,7 @@ export default function Header() {
       <Link className="flex items-center justify-center" href="/">
         <Image
           src="/images/logo-black.png"
-          alt="AutoPeças Online"
+          alt="Peças Por Código"
           width={160}
           height={40}
           className="object-contain dark:hidden block"
