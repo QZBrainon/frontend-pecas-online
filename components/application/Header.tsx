@@ -28,7 +28,7 @@ export default function Header() {
     }
   }, [token]);
   return (
-    <header className="flex items-center py-10 container mx-auto px-4">
+    <header className="flex items-center container mx-auto px-4">
       <Link className="flex items-center justify-center" href="/">
         <Image
           src="/images/logo-white.png"

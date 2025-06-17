@@ -189,8 +189,8 @@ export default function Home() {
 
         <section
           className={clsx("w-full container mx-auto", {
-            "py-6 md:py-6": isShortScreen,
-            "py-6 md:py-12 lg:py-10": !isShortScreen,
+            "py-6 md:py-2": isShortScreen,
+            "py-6 md:py-6 lg:py-10": !isShortScreen,
           })}
         >
           <div className="container px-4 md:px-6">
@@ -254,7 +254,7 @@ export default function Home() {
         </section>
 
         <section className="w-full">
-          <div className="container mx-auto px-4 md:px-6">
+          <div className="container mx-auto px-4 md:px-2">
             {loading ? <TableSkeleton /> : <ProductTable products={products} />}
             <div className="flex container mx-auto">
               <PaginationControls
