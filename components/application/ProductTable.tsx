@@ -122,7 +122,7 @@ export default function ProductTable({ products }: ProductTableProps) {
                   className="text-xs sm:text-sm max-w-[90px] sm:max-w-[100px]"
                   title={product.fornecedor.razaoSocial}
                 >
-                  {truncateDescription(product.fornecedor.razaoSocial, 2)}
+                  {product.fornecedor.razaoSocial}
                 </TableCell>
                 <TableCell className="text-xs sm:text-sm text-center ">
                   {product.quantidade}
