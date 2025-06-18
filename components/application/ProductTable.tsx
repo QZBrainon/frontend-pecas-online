@@ -47,6 +47,17 @@ interface ProductTableProps {
   products: Product[];
 }
 
+function truncateDescription(
+  description: string,
+  wordLimit: number = 5
+): string {
+  const words = description.trim().split(/\s+/);
+  if (words.length <= wordLimit) {
+    return description;
+  }
+  return `${words.slice(0, wordLimit).join(" ")}...`;
+}
+
 function formatPhoneNumber(phone: string): string {
   const cleaned = phone.replace(/\D/g, ""); // Remove non-numeric characters
   if (cleaned.length === 10) {
@@ -73,11 +84,14 @@ export default function ProductTable({ products }: ProductTableProps) {
             <TableRow>
               <TableHead className="text-xs sm:text-sm">Código</TableHead>
               <TableHead className="text-xs sm:text-sm">Nome</TableHead>
-              <TableHead className="text-xs sm:text-sm">Categoria</TableHead>
               <TableHead className="text-xs sm:text-sm">Preço</TableHead>
               <TableHead className="text-xs sm:text-sm">Fornecedor</TableHead>
-              <TableHead className="text-xs sm:text-sm">Quantidade</TableHead>
-              <TableHead className="text-xs sm:text-sm">Estado</TableHead>
+              <TableHead className="text-xs sm:text-sm text-center">
+                Quantidade
+              </TableHead>
+              <TableHead className="text-xs sm:text-sm text-center">
+                Estado
+              </TableHead>
               <TableHead className="text-xs sm:text-sm">Contato</TableHead>
             </TableRow>
           </TableHeader>
@@ -85,20 +99,18 @@ export default function ProductTable({ products }: ProductTableProps) {
             {products.map((product: Product, index: number) => (
               <TableRow
                 key={product.id}
-                className={index % 2 === 0 ? "bg-background" : "bg-muted/80"}
+                className={index % 2 === 0 ? "bg-background" : "bg-muted"}
               >
                 <TableCell className="text-xs sm:text-sm">
                   {product.peca.codigo}
                 </TableCell>
-                <TableCell className="text-xs sm:text-sm text-nowrap">
-                  {product.peca.descricao}
+                <TableCell
+                  className="text-xs sm:text-sm max-w-[90px] sm:max-w-[120px]"
+                  title={product.peca.descricao}
+                >
+                  {truncateDescription(product.peca.descricao, 3)}
                 </TableCell>
-                <TableCell className="text-xs sm:text-sm">
-                  {product.peca.categoria?.nome?.trim()
-                    ? product.peca.categoria.nome
-                    : "Genérica"}
-                </TableCell>
-                <TableCell className="text-xs sm:text-sm text-nowrap">
+                <TableCell className="text-xs sm:text-sm max-w-[80px] sm:max-w-[90px]">
                   {product.peca.precoEmCentavos
                     ? new Intl.NumberFormat("pt-BR", {
                         style: "currency",
@@ -106,16 +118,19 @@ export default function ProductTable({ products }: ProductTableProps) {
                       }).format(product.peca.precoEmCentavos / 100)
                     : "Não informado"}
                 </TableCell>
-                <TableCell className="text-xs sm:text-sm text-nowrap">
-                  {product.fornecedor.razaoSocial}
+                <TableCell
+                  className="text-xs sm:text-sm max-w-[90px] sm:max-w-[100px]"
+                  title={product.fornecedor.razaoSocial}
+                >
+                  {truncateDescription(product.fornecedor.razaoSocial, 2)}
                 </TableCell>
-                <TableCell className="text-xs sm:text-sm text-center text-nowrap">
+                <TableCell className="text-xs sm:text-sm text-center ">
                   {product.quantidade}
                 </TableCell>
-                <TableCell className="text-xs sm:text-sm text-center text-nowrap">
+                <TableCell className="text-xs sm:text-sm text-center ">
                   {product.fornecedor.endereco.estado.sigla}
                 </TableCell>
-                <TableCell className="text-xs sm:text-sm text-nowrap tabular-nums">
+                <TableCell className="text-xs sm:text-sm  tabular-nums">
                   <div className="flex items-center">
                     {formatPhoneNumber(product.fornecedor.contato.whatsapp) ||
                       formatPhoneNumber(product.fornecedor.contato.telefone)}
