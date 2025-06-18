@@ -55,7 +55,7 @@ function truncateDescription(
   if (words.length <= wordLimit) {
     return description;
   }
-  return `${words.slice(0, wordLimit).join(" ")}...`;
+  return `${words.slice(0, wordLimit).join(" ")}`;
 }
 
 function formatPhoneNumber(phone: string): string {
