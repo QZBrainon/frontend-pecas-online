@@ -85,9 +85,7 @@ export default function ProductTable({ products }: ProductTableProps) {
               <TableHead className="text-xs sm:text-sm">Código</TableHead>
               <TableHead className="text-xs sm:text-sm">Nome</TableHead>
               <TableHead className="text-xs sm:text-sm">Preço</TableHead>
-              <TableHead className="text-xs sm:text-sm min-w-[150px]">
-                Fornecedor
-              </TableHead>
+              <TableHead className="text-xs sm:text-sm">Fornecedor</TableHead>
               <TableHead className="text-xs sm:text-sm text-center">
                 Quantidade
               </TableHead>
@@ -121,7 +119,7 @@ export default function ProductTable({ products }: ProductTableProps) {
                     : "Não informado"}
                 </TableCell>
                 <TableCell
-                  className="text-xs sm:text-sm max-w-[200px]"
+                  className="text-xs sm:text-sm text-nowrap"
                   title={product.fornecedor.razaoSocial}
                 >
                   {product.fornecedor.razaoSocial}
