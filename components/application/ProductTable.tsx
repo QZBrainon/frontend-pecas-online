@@ -65,7 +65,7 @@ function formatPhoneNumber(phone: string): string {
 
 export default function ProductTable({ products }: ProductTableProps) {
   return (
-    <div className="overflow-x-auto p-4 sm:p-6">
+    <div className="p-4 sm:p-6">
       <h2 className="text-2xl font-bold mb-6">Catálogo de Peças</h2>
       {products?.length > 0 ? (
         <Table className="w-full">
@@ -82,8 +82,11 @@ export default function ProductTable({ products }: ProductTableProps) {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {products.map((product: Product) => (
-              <TableRow key={product.id}>
+            {products.map((product: Product, index: number) => (
+              <TableRow
+                key={product.id}
+                className={index % 2 === 0 ? "bg-background" : "bg-muted/80"}
+              >
                 <TableCell className="text-xs sm:text-sm">
                   {product.peca.codigo}
                 </TableCell>
@@ -91,7 +94,9 @@ export default function ProductTable({ products }: ProductTableProps) {
                   {product.peca.descricao}
                 </TableCell>
                 <TableCell className="text-xs sm:text-sm">
-                  {product.peca.categoria?.nome?.trim() ? product.peca.categoria.nome : "Genérica"}
+                  {product.peca.categoria?.nome?.trim()
+                    ? product.peca.categoria.nome
+                    : "Genérica"}
                 </TableCell>
                 <TableCell className="text-xs sm:text-sm text-nowrap">
                   {product.peca.precoEmCentavos
