@@ -82,17 +82,17 @@ export default function ProductTable({ products }: ProductTableProps) {
         <Table className="w-full">
           <TableHeader>
             <TableRow>
-              <TableHead className="text-xs sm:text-sm">Código</TableHead>
-              <TableHead className="text-xs sm:text-sm">Nome</TableHead>
-              <TableHead className="text-xs sm:text-sm">Preço</TableHead>
-              <TableHead className="text-xs sm:text-sm">Fornecedor</TableHead>
-              <TableHead className="text-xs sm:text-sm text-center">
+              <TableHead className="text-xs lg:text-sm">Código</TableHead>
+              <TableHead className="text-xs lg:text-sm">Nome</TableHead>
+              <TableHead className="text-xs lg:text-sm">Preço</TableHead>
+              <TableHead className="text-xs lg:text-sm">Fornecedor</TableHead>
+              <TableHead className="text-xs lg:text-sm text-center">
                 Quantidade
               </TableHead>
-              <TableHead className="text-xs sm:text-sm text-center">
+              <TableHead className="text-xs lg:text-sm text-center">
                 Estado
               </TableHead>
-              <TableHead className="text-xs sm:text-sm">Contato</TableHead>
+              <TableHead className="text-xs lg:text-sm">Contato</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -101,16 +101,16 @@ export default function ProductTable({ products }: ProductTableProps) {
                 key={product.id}
                 className={index % 2 === 0 ? "bg-background" : "bg-muted"}
               >
-                <TableCell className="text-xs sm:text-sm">
+                <TableCell className="text-xs lg:text-sm">
                   {product.peca.codigo}
                 </TableCell>
                 <TableCell
-                  className="text-xs sm:text-sm max-w-[90px] sm:max-w-[120px]"
+                  className="text-xs lg:text-sm max-w-[90px] sm:max-w-[120px]"
                   title={product.peca.descricao}
                 >
                   {truncateDescription(product.peca.descricao, 3)}
                 </TableCell>
-                <TableCell className="text-xs sm:text-sm max-w-[80px] sm:max-w-[90px]">
+                <TableCell className="text-xs lg:text-sm max-w-[80px] sm:max-w-[90px]">
                   {product.peca.precoEmCentavos
                     ? new Intl.NumberFormat("pt-BR", {
                         style: "currency",
@@ -119,18 +119,18 @@ export default function ProductTable({ products }: ProductTableProps) {
                     : "Não informado"}
                 </TableCell>
                 <TableCell
-                  className="text-xs sm:text-sm text-nowrap"
+                  className="text-xs lg:text-sm lg:text-nowrap max-w-[200px]"
                   title={product.fornecedor.razaoSocial}
                 >
                   {product.fornecedor.razaoSocial}
                 </TableCell>
-                <TableCell className="text-xs sm:text-sm text-center ">
+                <TableCell className="text-xs lg:text-sm text-center ">
                   {product.quantidade}
                 </TableCell>
-                <TableCell className="text-xs sm:text-sm text-center ">
+                <TableCell className="text-xs lg:text-sm text-center ">
                   {product.fornecedor.endereco.estado.sigla}
                 </TableCell>
-                <TableCell className="text-xs sm:text-sm  tabular-nums">
+                <TableCell className="text-xs lg:text-sm  tabular-nums">
                   <div className="flex items-center">
                     {formatPhoneNumber(product.fornecedor.contato.whatsapp) ||
                       formatPhoneNumber(product.fornecedor.contato.telefone)}
