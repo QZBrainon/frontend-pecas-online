@@ -20,20 +20,15 @@ export default function About() {
         {/* Container do vídeo */}
         <div className="flex justify-center mb-12">
           <div className="w-full max-w-4xl rounded-lg overflow-hidden shadow-lg">
-            <video
-              controls
-              autoPlay
-              muted
-              loop
-              className="w-full"
-              poster="https://backend.pecasonlinex.com.br/uploads/thumbnail.jpg" // Opcional: adicione uma thumbnail
-            >
-              <source
-                src="https://backend.pecasonlinex.com.br/uploads/pecas-online-pv.mp4"
-                type="video/mp4"
-              />
-              Seu navegador não suporta o elemento de vídeo.
-            </video>
+            <div className="relative pb-[56.25%] h-0">
+              <iframe
+                className="absolute top-0 left-0 w-full h-full"
+                src="https://www.youtube.com/embed/6o8JDqUhrJQ?autoplay=1&mute=1&loop=1"
+                title="Peças Por Código Introduction Video"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            </div>
           </div>
         </div>
 
@@ -45,10 +40,10 @@ export default function About() {
               </h2>
               <p className="leading-relaxed mb-4 text-muted-foreground">
                 Nossa missão é oferecer o catálogo B2B mais confiável e
-                atualizado de peças, conectando empresas a
-                fornecedores regionais com transparência e eficiência,
-                facilitando o acesso a estoques em tempo real e promovendo a
-                agilidade em todos os setores.
+                atualizado de peças, conectando empresas a fornecedores
+                regionais com transparência e eficiência, facilitando o acesso a
+                estoques em tempo real e promovendo a agilidade em todos os
+                setores.
               </p>
             </div>
           </div>
