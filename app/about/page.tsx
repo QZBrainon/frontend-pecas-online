@@ -20,15 +20,20 @@ export default function About() {
         {/* Container do vídeo */}
         <div className="flex justify-center mb-12">
           <div className="w-full max-w-4xl rounded-lg overflow-hidden shadow-lg">
-            <div className="relative pb-[56.25%] h-0">
-              <iframe
-                className="absolute top-0 left-0 w-full h-full"
-                src="https://www.youtube.com/embed/6o8JDqUhrJQ?autoplay=1&mute=1&loop=1"
-                title="Peças Por Código Introduction Video"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              ></iframe>
-            </div>
+            <video
+              controls
+              autoPlay
+              muted
+              loop
+              className="w-full"
+              poster="https://backend.pecasonlinex.com.br/uploads/thumbnail.jpg" // Opcional: adicione uma thumbnail
+            >
+              <source
+                src="https://backend.pecasonlinex.com.br/uploads/pecas-online-pv.mp4"
+                type="video/mp4"
+              />
+              Seu navegador não suporta o elemento de vídeo.
+            </video>
           </div>
         </div>
 
