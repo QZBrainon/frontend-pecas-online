@@ -19,7 +19,7 @@ export default function About() {
 
         {/* Container do vídeo */}
         <div className="flex justify-center mb-12">
-          <div className="w-full max-w-4xl rounded-lg overflow-hidden shadow-lg">
+          {/* <div className="w-full max-w-4xl rounded-lg overflow-hidden shadow-lg">
             <video
               controls
               autoPlay
@@ -34,7 +34,7 @@ export default function About() {
               />
               Seu navegador não suporta o elemento de vídeo.
             </video>
-          </div>
+          </div> */}
         </div>
 
         <div className="flex flex-wrap -m-4 justify-center">
