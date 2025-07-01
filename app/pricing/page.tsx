@@ -83,7 +83,8 @@ export default async function Pricing() {
               <h1 className="text-5xl text-foreground leading-none flex items-center pb-4 mb-4 border-b border-border">
                 <span>
                   {convertCentsToBRL(
-                    planos.find((plano: Plano) => plano.id === PLANOS.VIP) ?.precoEmCentavos ?? ""
+                    planos.find((plano: Plano) => plano.id === PLANOS.VIP)
+                      ?.precoEmCentavos ?? ""
                   )}
                 </span>
                 <span className="text-lg ml-1 font-normal text-muted-foreground">

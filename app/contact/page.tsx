@@ -14,6 +14,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
+import { FaWhatsapp } from "react-icons/fa";
+
 const formSchema = z.object({
   name: z
     .string()
@@ -230,6 +232,29 @@ export default function Contact() {
                   ) : (
                     "Enviar Mensagem"
                   )}
+                </Button>
+
+                <div className="flex items-center justify-center my-4">
+                  <div className="flex-grow border-t border-muted-foreground"></div>
+                  <span className="mx-2 text-muted-foreground text-sm font-medium">
+                    OU
+                  </span>
+                  <div className="flex-grow border-t border-muted-foreground"></div>
+                </div>
+
+                <Button
+                  asChild
+                  className="w-full flex justify-center items-center mx-auto text-white bg-green-500 border-0 py-2 px-8 focus:outline-none hover:bg-green-600 rounded text-center text-lg"
+                >
+                  <a
+                    href="https://wa.me/+19996585656"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Entrar em contato pelo WhatsApp"
+                  >
+                    <FaWhatsapp className="w-12 h-12" />
+                    Fale pelo WhatsApp
+                  </a>
                 </Button>
               </div>
             </form>
