@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import Header from "@/components/application/Header";
 import Footer from "@/components/application/Footer";
 import { Toaster } from "@/components/ui/toaster";
+import { GoogleTagManager } from "@next/third-parties/google";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -17,6 +18,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-br">
+      <head>
+        <GoogleTagManager gtmId="AW-16976370308" />
+      </head>
       <body
         className={`${poppins.className} antialiased leading-5 flex flex-col min-h-screen text-xl`}
       >
