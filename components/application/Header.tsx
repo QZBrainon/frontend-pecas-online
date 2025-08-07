@@ -71,6 +71,12 @@ export default function Header() {
         >
           Contato
         </Link>
+        <Link
+          className="text-md hover:underline underline-offset-4"
+          href="/a-curve"
+        >
+          Curva A
+        </Link>
       </nav>
       <div className="ml-auto items-center gap-2 hidden md:flex">
         <DarkModeToggle />
