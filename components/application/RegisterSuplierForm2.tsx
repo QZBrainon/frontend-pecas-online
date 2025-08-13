@@ -147,9 +147,9 @@ export default function RegisterSuplierForm2() {
           name="empresa"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Empresa</FormLabel>
+              <FormLabel>Nome Fantasia</FormLabel>
               <FormControl>
-                <Input placeholder="Empresa" {...field} />
+                <Input placeholder="Nome Fantasia" {...field} />
               </FormControl>
               <FormMessage className="text-red-500" />
             </FormItem>
