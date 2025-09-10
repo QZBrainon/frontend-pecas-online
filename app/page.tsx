@@ -1,6 +1,12 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import React, { Suspense, use, useEffect, useState } from "react";
 import { TableSkeleton } from "@/components/application/SkeletonTable";
 import ProductTable from "@/components/application/ProductTable";
@@ -21,6 +27,8 @@ export default function Home() {
   const [additionalBanners, setAdditionalBanners] = useState<string[]>([]);
   const [showVideo, setShowVideo] = useState(false);
   const [isShortScreen, setIsShortScreen] = useState(false);
+  const [showTooltip, setShowTooltip] = useState(false);
+  const [inputError, setInputError] = useState("");
 
   // Check if the screen is shorter than 1080px
   useEffect(() => {
@@ -52,8 +60,30 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, []);
 
+  const validateInput = (value: string) => {
+    if (value.includes("/")) {
+      setInputError("Favor remover os espaços e barras na pesquisa");
+      setShowTooltip(true);
+      return false;
+    }
+    if (value.includes(" ")) {
+      setInputError("Favor remover os espaços e barras na pesquisa");
+      setShowTooltip(true);
+      return false;
+    }
+    setInputError("");
+    setShowTooltip(false);
+    return true;
+  };
+
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCode(e.target.value);
+    const value = e.target.value;
+
+    if (validateInput(value)) {
+      setCode(value);
+    } else {
+      return;
+    }
   };
 
   const onPageChange = (newPage: number) => {
@@ -236,17 +266,36 @@ export default function Home() {
                   className="flex space-x-2"
                   onSubmit={(e) => {
                     e.preventDefault();
-                    fetchData(code, currentPage);
+                    if (code && !inputError) {
+                      fetchData(code, currentPage);
+                    }
                   }}
                 >
-                  <Input
-                    className="flex-1"
-                    placeholder="Digite os códigos das peças"
-                    type="search"
-                    value={code}
-                    onChange={handleSearch}
-                  />
-                  <Button type="submit">Pesquisar</Button>
+                  <TooltipProvider>
+                    <Tooltip open={showTooltip}>
+                      <TooltipTrigger asChild>
+                        <Input
+                          className={clsx("flex-1", {
+                            "border-red-500 focus:border-red-500": inputError,
+                          })}
+                          placeholder="Digite os códigos das peças"
+                          type="search"
+                          value={code}
+                          onChange={handleSearch}
+                          onBlur={() => setShowTooltip(false)}
+                        />
+                      </TooltipTrigger>
+                      <TooltipContent
+                        side="top"
+                        className="bg-red-500 text-white"
+                      >
+                        <p>{inputError}</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+                  <Button type="submit" disabled={!!inputError}>
+                    Pesquisar
+                  </Button>
                 </form>
               </div>
             </div>
