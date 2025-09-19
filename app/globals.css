@@ -79,3 +79,22 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+.faq-container {
+  max-height: 400px; /* Prevent overflow on small screens */
+  overflow-y: auto; /* Allow scrolling if FAQs are long */
+}
+
+@media (max-width: 640px) {
+  .faq-container {
+    width: 90%; /* Full width on small screens */
+    right: 5%; /* Center horizontally */
+    bottom: 80px; /* Adjust for mobile */
+  }
+  .faq-button {
+    bottom: 16px;
+    right: 16px;
+    width: 48px;
+    height: 48px;
+  }
+}
